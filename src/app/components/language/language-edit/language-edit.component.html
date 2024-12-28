@@ -1,0 +1,197 @@
+<div *ngIf="languageId !== undefined && _language">
+  <div *ngIf="!_inProgress; else inProgress">
+    <div class="container">
+      <!-- === TOASTER ============================================================ -->
+      <div *ngIf="_showAfterUpdatedMessage">
+        <div class="toast align-items-center text-bg-primary show" role="alert" aria-live="assertive" aria-atomic="true" style="margin-top: 1em;">
+          <div class="d-flex">
+            <div class="toast-body">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
+                <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
+                <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
+              </svg>
+
+<!--              Language has been updated 131-->
+              {{uiElementService.uiElements.at(131)}}
+
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+      <!-- === END OF TOASTER ===================================================== -->
+      <p style="margin-top: 1em;" class="text-danger">{{_message}}</p>
+      <div class="card" style="max-width: 40em;">
+        <div class="card-header">
+          <span class="text-primary align-content-center">
+
+<!--            Language: <b>{{_language.languageName}}</b> |-->
+            {{uiElementService.uiElements.at(90)}}: <b>{{_language.languageName}}</b> |
+
+            <b>
+
+<!--              <span *ngIf="_language.isActive" class="text-success">Active</span>-->
+              <span *ngIf="_language.isActive" class="text-success">{{uiElementService.uiElements.at(127)}}</span>
+
+<!--              <span *ngIf="!_language.isActive" class="text-danger">Inactive</span>-->
+              <span *ngIf="!_language.isActive" class="text-danger">{{uiElementService.uiElements.at(128)}}</span>
+
+<!--            </b><span *ngIf="_language.isInitial"> | <span class="text-bg-primary">Initial</span></span>-->
+            </b><span *ngIf="_language.isInitial"> | <span class="text-bg-primary">{{uiElementService.uiElements.at(126)}}</span></span>
+
+          </span>
+        </div>
+        <div class="card-body">
+          <div class="card">
+            <div class="card-body">
+              <div class="input-group mb-3" >
+
+<!--                <span class="input-group-text" id="codeLabel" style="min-width: 5em;">Language Code</span>-->
+                <span class="input-group-text" id="codeLabel" style="min-width: 5em;">{{uiElementService.uiElements.at(91)}}</span>
+
+                <input style="max-width: 25em;" type="text" class="form-control flex-grow-1"
+                       id="code" required [(ngModel)]="_newCode" name="Language Code" maxlength="3" />
+              </div>
+              <div class="input-group mb-3" >
+
+<!--                <span class="input-group-text" id="nameLabel" style="min-width: 5em;">Language Name</span>-->
+                <span class="input-group-text" id="nameLabel" style="min-width: 5em;">{{uiElementService.uiElements.at(92)}}</span>
+
+                <input style="max-width: 25em;" type="text" class="form-control flex-grow-1"
+                       id="name" required [(ngModel)]="_newName" name="Language Name" maxlength="50" />
+              </div>
+            </div>
+          </div>
+          <!------- active status ------->
+          <div class="card" *ngIf="!_language.byDefault" style="margin-top: 1em;">
+            <div class="card-body">
+              <div *ngIf="_newActiveStatus">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="" id="f1" checked>
+                  <label class="form-check-label" for="f1">
+
+<!--                    <span class="text-bg-primary">Language is active</span>-->
+                    <span class="text-bg-primary">{{uiElementService.uiElements.at(127)}}</span>
+
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input (click)="_newActiveStatus = false" class="form-check-input" type="radio" name="" id="f2">
+                  <label class="form-check-label" for="f2">
+
+<!--                    <span class="text-primary">Language is inactive</span>-->
+                    <span class="text-primary">{{uiElementService.uiElements.at(128)}}</span>
+
+                  </label>
+                </div>
+              </div>
+              <div *ngIf="!_newActiveStatus">
+                <div class="form-check">
+                  <input (click)="_newActiveStatus = true" class="form-check-input" type="radio" name="" id="f1a">
+                  <label class="form-check-label" for="f1a">
+
+<!--                    <span class="text-primary">Language is active</span>-->
+                    <span class="text-primary">{{uiElementService.uiElements.at(127)}}</span>
+
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="" id="f2a" checked>
+                  <label class="form-check-label" for="f2a">
+
+<!--                    <span class="text-bg-primary">Language is inactive</span>-->
+                    <span class="text-bg-primary">{{uiElementService.uiElements.at(128)}}</span>
+
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of active status -->
+        </div>
+        <div class="card-footer">
+          <div *ngIf="!_askToConfirm">
+
+<!--            <button class="btn btn-sm btn-primary" type="button" (click)="updateLanguage()">Update</button>-->
+            <button class="btn btn-sm btn-primary" type="button" (click)="updateLanguage()">{{uiElementService.uiElements.at(81)}}</button>
+
+            &nbsp;<button class="btn btn-sm btn-outline-primary" type="button" (click)="unDoData(); _message='' ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+              <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+            </svg>
+<!--            undo-->
+            {{uiElementService.uiElements.at(28)}}
+          </button>
+
+<!--            &nbsp;<button class="btn btn-sm btn-outline-primary" type="button" (click)="returnToViewMode(); _askToConfirm = false;">Cancel</button>-->
+            &nbsp;<button class="btn btn-sm btn-outline-primary" type="button" (click)="returnToViewMode(); _askToConfirm = false;">{{uiElementService.uiElements.at(29)}}</button>
+
+<!--            &nbsp;<button *ngIf="!_language.isInitial && !_language.byDefault" class="btn btn-sm btn-danger" type="button" (click)="deleteLanguage()">Delete</button>-->
+            &nbsp;<button *ngIf="!_language.isInitial && !_language.byDefault" class="btn btn-sm btn-danger" type="button" (click)="deleteLanguage()">{{uiElementService.uiElements.at(54)}}</button>
+
+          </div>
+          <div *ngIf="_askToConfirm">
+            <h6 class="text-danger">
+
+<!--              DANGER! DANGER! DANGER!-->
+<!--              This will permanently delete all descriptors that are related to this language!-->
+<!--              Are you sure to delete the language {{_language.languageName}}?-->
+
+              {{uiElementService.uiElements.at(132)}} {{_language.languageName}}?
+
+            </h6>
+
+<!--            <button class="btn btn-sm btn-outline-primary" type="button" (click)="_askToConfirm = false; _deleteProcessAnswerUnlocked = false">Cancel</button>-->
+            <button class="btn btn-sm btn-outline-primary" type="button" (click)="_askToConfirm = false; _deleteProcessAnswerUnlocked = false">{{uiElementService.uiElements.at(29)}}</button>
+
+            <hr>
+            <div class="form-check form-switch" *ngIf="_deleteProcessAnswerUnlocked">
+              <input class="form-check-input" type="checkbox"  (click)="_deleteProcessAnswerUnlocked = !_deleteProcessAnswerUnlocked;" checked>
+
+              <!--              <label class="form-check-label">Unlock the answer</label>-->
+              <label class="form-check-label">{{uiElementService.uiElements.at(133)}}</label>
+
+            </div>
+            <div class="form-check form-switch" *ngIf="!_deleteProcessAnswerUnlocked">
+              <input class="form-check-input" type="checkbox"  (click)="_deleteProcessAnswerUnlocked = !_deleteProcessAnswerUnlocked;">
+
+<!--              <label class="form-check-label">Unlock the answer</label>-->
+              <label class="form-check-label">{{uiElementService.uiElements.at(133)}}</label>
+
+            </div>
+            <hr>
+            <div *ngIf="_deleteProcessAnswerUnlocked">
+              <button class="btn btn-sm btn-primary" type="button" (click)="_askToConfirm = false; _deleteProcessAnswerUnlocked = false;">
+
+<!--                &nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;-->
+                &nbsp;&nbsp;&nbsp;&nbsp;{{uiElementService.uiElements.at(38)}}&nbsp;&nbsp;&nbsp;&nbsp;
+
+              </button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-sm btn-outline-danger" type="button" (click)="deleteLanguageProcess()">
+
+<!--              Yes-->
+              {{uiElementService.uiElements.at(39)}}
+
+            </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- === INDICATOR ============================================================ -->
+<ng-template #inProgress>
+  <div class="d-flex justify-content-center align-items-center" style="height: 20vh;">
+    <div class="text-center">
+      <div class="d-flex align-items-center">
+        updating...&nbsp;&nbsp;
+        <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

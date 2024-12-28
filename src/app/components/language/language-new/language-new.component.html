@@ -1,0 +1,114 @@
+<!-- === NEW ============================================================ -->
+
+<div *ngIf="!_inProgress; else inProgress">
+  <div class="container">
+    <p style="margin-top: 1em;" class="text-danger">{{_message}}</p>
+    <div class="card" style="max-width: 40em;">
+
+<!--      <div class="card-header"><h6 class="text-primary">New Language 129</h6></div>-->
+      <div class="card-header"><h6 class="text-primary">{{uiElementService.uiElements.at(129)}}</h6></div>
+
+      <div class="card-body">
+        <div class="card">
+          <div class="card-body">
+            <div class="input-group mb-3" >
+
+<!--              <span class="input-group-text" id="codeLabelNew" style="min-width: 5em;">Language Code 91</span>-->
+              <span class="input-group-text" id="codeLabelNew" style="min-width: 5em;">{{uiElementService.uiElements.at(91)}}</span>
+
+              <input style="max-width: 25em;" type="text" class="form-control flex-grow-1"
+                     id="codeNew" required [(ngModel)]="newLanguage.languageCode" name="Language Code" maxlength="3" />
+            </div>
+            <div class="input-group mb-3" >
+
+<!--              <span class="input-group-text" id="nameLabelNew" style="min-width: 5em;">Language Name</span>-->
+              <span class="input-group-text" id="nameLabelNew" style="min-width: 5em;">{{uiElementService.uiElements.at(92)}}</span>
+
+              <input style="max-width: 25em;" type="text" class="form-control flex-grow-1"
+                     id="nameNew" required [(ngModel)]="newLanguage.languageName" name="Language Name" maxlength="50" />
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-top: 1em;">
+          <div class="card-body">
+            <div *ngIf="newLanguage.isActive">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="" id="f1New" checked>
+                <label class="form-check-label" for="f1New">
+
+<!--                  <span class="text-success">Language is active 127</span>-->
+                  <span class="text-success">{{uiElementService.uiElements.at(127)}}</span>
+
+                </label>
+              </div>
+              <div class="form-check">
+                <input (click)="newLanguage.isActive = false" class="form-check-input" type="radio" name="" id="f2New">
+                <label class="form-check-label" for="f2New">
+
+<!--                  <span class="text-danger">Language is inactive 128</span>-->
+                  <span class="text-danger">{{uiElementService.uiElements.at(128)}}</span>
+
+                </label>
+              </div>
+            </div>
+            <div *ngIf="!newLanguage.isActive">
+              <div class="form-check">
+                <input (click)="newLanguage.isActive = true" class="form-check-input" type="radio" name="" id="f1aNew">
+                <label class="form-check-label" for="f1aNew">
+
+<!--                  <span class="text-success">Language is active 127</span>-->
+                  <span class="text-success">{{uiElementService.uiElements.at(127)}}</span>
+
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="" id="f2aNew" checked>
+                <label class="form-check-label" for="f2aNew">
+
+<!--                  <span class="text-danger">Language is inactive 128</span>-->
+                  <span class="text-danger">{{uiElementService.uiElements.at(128)}}</span>
+
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div *ngIf="!_askToConfirm">
+
+<!--          <button class="btn btn-sm btn-primary" type="button" (click)="saveNewLanguage()">Save New Language 130</button>-->
+          <button class="btn btn-sm btn-primary" type="button" (click)="saveNewLanguage()">Save New Language</button>
+
+          &nbsp;<button class="btn btn-sm btn-outline-primary" type="button" (click)="unDoData(); _message='' ">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+          </svg>
+
+<!--          clear 104-->
+          {{uiElementService.uiElements.at(104)}}
+
+        </button>
+
+<!--          &nbsp;<button class="btn btn-sm btn-outline-primary" type="button" (click)="returnToViewMode()">Cancel 29</button>-->
+          &nbsp;<button class="btn btn-sm btn-outline-primary" type="button" (click)="returnToViewMode()">{{uiElementService.uiElements.at(29)}}</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- === INDICATOR ============================================================ -->
+<ng-template #inProgress>
+  <div class="d-flex justify-content-center align-items-center" style="height: 20vh;">
+    <div class="text-center">
+      <div class="d-flex align-items-center">
+        updating...&nbsp;&nbsp;
+        <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>

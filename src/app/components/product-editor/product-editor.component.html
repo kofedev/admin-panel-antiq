@@ -1,0 +1,353 @@
+<div *ngIf="productId != undefined && product"
+     class="container" style="margin-top: 1em;">
+  <!-- **** RETURN BUTTON **** -->
+  <button class="btn btn-sm btn-outline-primary" type="button" (click)="returnToViewMode()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
+          </svg>
+<!--          Return-->
+    {{uiElementService.uiElements.at(26)}}
+  </button>
+  <!-- **** end of return button **** -->
+  <p></p>
+<!--  <app-descriptor-editor [descriptor]="descriptor"></app-descriptor-editor>-->
+  <app-image-edit [product]="product"></app-image-edit>
+  <p></p>
+
+  <div class="card">
+    <div class="card-header">
+
+<!--      <strong>Product Editor: </strong>-->
+      <strong>{{uiElementService.uiElements.at(66)}}: </strong>
+
+      <span *ngFor="let descriptor of product.titleDescriptors">
+        <span *ngIf="descriptor.language.languageId === currentLanguageService.currentLanguage.languageId">
+          {{ descriptor.value }}
+        </span>
+      </span>
+      (Sys Id: {{ product.productId }})
+    </div>
+    <div class="card-body">
+<!--      <p>ID: {{ product.productId }}</p>-->
+
+<!--      <p *ngIf="product.active" class="text-success">Product is active</p>-->
+      <p *ngIf="product.active" class="text-success">{{uiElementService.uiElements.at(55)}}</p>
+
+<!--      <p *ngIf="!product.active" class="text-danger">Product is inactive</p>-->
+      <p *ngIf="!product.active" class="text-danger">{{uiElementService.uiElements.at(56)}}</p>
+
+      <!------- active status ------->
+      <div *ngIf="product.active">
+        <div class="form-check">
+
+<!--          <input class="form-check-input" type="radio" name="" id="f1" checked><label class="form-check-label" for="f1"><span class="text-bg-primary">Product is active</span></label>-->
+          <input class="form-check-input" type="radio" name="" id="f1" checked><label class="form-check-label" for="f1"><span class="text-bg-primary">{{uiElementService.uiElements.at(55)}}</span></label>
+
+        </div>
+        <div class="form-check">
+
+<!--          <input (click)="product.active = false" class="form-check-input" type="radio" name="" id="f2"><label class="form-check-label" for="f2"><span class="text-primary">Product is inactive</span></label>-->
+          <input (click)="product.active = false" class="form-check-input" type="radio" name="" id="f2"><label class="form-check-label" for="f2"><span class="text-primary">{{uiElementService.uiElements.at(56)}}</span></label>
+
+        </div>
+      </div>
+      <div *ngIf="!product.active">
+        <div class="form-check">
+
+<!--          <input (click)="product.active = true" class="form-check-input" type="radio" name="" id="f1a"><label class="form-check-label" for="f1a"><span class="text-primary">Product is active</span></label>-->
+          <input (click)="product.active = true" class="form-check-input" type="radio" name="" id="f1a"><label class="form-check-label" for="f1a"><span class="text-primary">{{uiElementService.uiElements.at(55)}}</span></label>
+
+        </div>
+        <div class="form-check">
+
+<!--          <input class="form-check-input" type="radio" name="" id="f2a" checked><label class="form-check-label" for="f2a"><span class="text-bg-primary">Product is inactive</span></label>-->
+          <input class="form-check-input" type="radio" name="" id="f2a" checked><label class="form-check-label" for="f2a"><span class="text-bg-primary">{{uiElementService.uiElements.at(56)}}</span></label>
+
+        </div>
+      </div>
+      <!-- end of active status -->
+      <p></p>
+      <!-- part number -->
+      <div class="input-group">
+
+<!--        <span class="input-group-text">Part number</span>-->
+        <span class="input-group-text">{{uiElementService.uiElements.at(57)}}</span>
+
+        <input type="text" class="form-control" [(ngModel)]="product.partNumber" maxlength="250">
+      </div>
+      <!-- keywords -->
+      <div class="input-group">
+
+<!--        <span class="input-group-text">Keywords</span>-->
+        <span class="input-group-text">{{uiElementService.uiElements.at(58)}}</span>
+
+        <input type="text" class="form-control" [(ngModel)]="product.keyWords" maxlength="250">
+      </div>
+      <!-- note -->
+      <div class="input-group">
+
+<!--        <span class="input-group-text">Note</span>-->
+        <span class="input-group-text">{{uiElementService.uiElements.at(59)}}</span>
+
+        <input type="text" class="form-control" [(ngModel)]="product.note" maxlength="250">
+      </div>
+      <!-- offer price -->
+      <div class="input-group">
+
+<!--        <span class="input-group-text">Offer price</span>-->
+        <span class="input-group-text">{{uiElementService.uiElements.at(46)}}</span>
+
+        <input type="text" class="form-control" [(ngModel)]="product.offerPrice" maxlength="250">
+      </div>
+      <!-- current quantity -->
+      <div class="input-group">
+
+<!--        <span class="input-group-text">Current quantity</span>-->
+        <span class="input-group-text">{{uiElementService.uiElements.at(60)}}</span>
+
+        <input type="text" class="form-control" [(ngModel)]="product.currentQuantity" maxlength="250">
+      </div>
+      <!-- publication date -->
+      <div class="input-group">
+
+<!--        <span class="input-group-text">Publication date</span>-->
+        <span class="input-group-text">{{uiElementService.uiElements.at(61)}}</span>
+
+        <input type="datetime-local" class="form-control"
+               [ngModel]="product.publishedOn | date:'yyyy-MM-ddTHH:mm'"
+               (ngModelChange)="product.publishedOn = $event ? parseDate($event) : undefined"
+               name="productBuffer.publishedOn" />
+      </div>
+    </div>
+  </div>
+
+  <!-- **** LOCATION MATTER (CATEGORY) **** -->
+  <div class="card" style="margin-top: 1em;">
+    <div class="card-header">
+
+<!--      <span class="text-primary"><strong>Location</strong>&nbsp;-->
+      <span class="text-primary"><strong>{{uiElementService.uiElements.at(16)}}</strong>&nbsp;
+
+        <span *ngIf="originalParentID != product.category.categoryId" class="text-danger">
+
+<!--          (new)-->
+          {{uiElementService.uiElements.at(17)}}
+
+        </span>
+      </span>
+    </div>
+    <div class="card-body">
+      <!-- *** Parent Information *** -->
+      <!--      <p>Parent ID: {{ category.parent.categoryId }}</p>-->
+        <div *ngIf="product.category.root">
+
+<!--          <h6>Parent category: <span class="text-muted">Root</span></h6>-->
+          <h6>{{uiElementService.uiElements.at(19)}}: <span class="text-muted">{{uiElementService.uiElements.at(20)}}</span></h6>
+
+        </div>
+        <div *ngIf="!product.category.root">
+
+<!--          <h6>Parent category:-->
+          <h6>{{uiElementService.uiElements.at(19)}}:
+
+            <span class="text-muted" *ngFor="let descriptor of product.category.titleDescriptors">
+              <span *ngIf="descriptor.language.languageId === currentLanguageService.currentLanguage.languageId">
+                {{ descriptor.value }}
+              </span>
+            </span>
+          </h6>
+        </div>
+      <p></p>
+      <div *ngIf="!_showCategoryTreeToSelectNewLocation">
+
+<!--        <button class="btn btn-sm btn-secondary" type="button" (click)="_showCategoryTreeToSelectNewLocation = true; setCurrentCategoryInTree()">Relocation show</button>-->
+        <button class="btn btn-sm btn-secondary" type="button" (click)="_showCategoryTreeToSelectNewLocation = true; setCurrentCategoryInTree()">{{uiElementService.uiElements.at(41)}}</button>
+
+      </div>
+      <div *ngIf="_showCategoryTreeToSelectNewLocation" class="">
+
+<!--        <button class="btn btn-sm btn-outline-secondary" type="button" (click)="_showCategoryTreeToSelectNewLocation = false">Relocation hide</button>-->
+        <button class="btn btn-sm btn-outline-secondary" type="button" (click)="_showCategoryTreeToSelectNewLocation = false">{{uiElementService.uiElements.at(42)}}</button>
+
+        <!-- *** Category Tree Integration *** -->
+        <div style="margin-top: 1em;">
+          <app-category-tree [currentCategory]="currentCategory"></app-category-tree>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p></p>
+
+  <!-- **** DESCRIPTORS: TITLE **** -->
+  <div class="card bg-body-secondary">
+    <div class="card-header">
+
+<!--      <h6 class="text-primary">Title descriptors</h6>-->
+      <h6 class="text-primary">{{uiElementService.uiElements.at(62)}}</h6>
+
+    </div>
+    <div class="card-body">
+      <div *ngFor="let descriptor of product.titleDescriptors | sortDescriptorsByLanguage" style="margin-top: 1em;">
+        <div style="margin-bottom: 1em;">
+          <app-descriptor-editor [descriptor]="descriptor"></app-descriptor-editor>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p></p>
+
+  <!-- **** DESCRIPTORS: BRIEF **** -->
+  <div class="card bg-body-secondary">
+    <div class="card-header">
+
+<!--      <h6 class="text-primary">Brief descriptors</h6>-->
+      <h6 class="text-primary">{{uiElementService.uiElements.at(63)}}</h6>
+
+    </div>
+    <div class="card-body">
+      <div *ngFor="let descriptor of product.briefDescriptors | sortDescriptorsByLanguage" style="margin-top: 1em;">
+        <div style="margin-bottom: 1em;">
+          <app-descriptor-editor [descriptor]="descriptor"></app-descriptor-editor>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p></p>
+
+  <!-- **** DESCRIPTORS: FULL **** -->
+  <div class="card bg-body-secondary">
+    <div class="card-header">
+
+<!--      <h6 class="text-primary">Full descriptors</h6>-->
+      <h6 class="text-primary">{{uiElementService.uiElements.at(64)}}</h6>
+
+    </div>
+    <div class="card-body">
+      <div *ngFor="let descriptor of product.fullDescriptors | sortDescriptorsByLanguage" style="margin-top: 1em;">
+        <div style="margin-bottom: 1em;">
+          <app-descriptor-editor [descriptor]="descriptor"></app-descriptor-editor>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p></p>
+
+  <!-- === MESSAGE AFTER UPDATE ================== -->
+  <div *ngIf="_showAfterUpdatedMessage" style="margin-top: 1em;">
+    <div class="card bg-body-secondary" (click)="_showAfterUpdatedMessage = false">
+
+<!--      <div class="container text-primary"><p></p>Product has been saved / updated-->
+      <div class="container text-primary"><p></p>{{uiElementService.uiElements.at(67)}}
+
+        &nbsp;<button (click)="_showAfterUpdatedMessage = false" type="button" class="btn btn-sm btn-outline-primary me-2 m-auto">Ok</button>
+      </div>
+      <p></p>
+    </div>
+  </div>
+  <!-- === END OF MESSAGE AFTER UPDATE =========== -->
+
+  <!-- === LIST OF ORDERS IF EXIST === -->
+  <div *ngIf="orders.length > 0" class="card">
+    <div class="card-header">
+
+<!--      <strong>Orders where the product is listed</strong>-->
+      <strong>{{uiElementService.uiElements.at(68)}}</strong>
+
+    </div>
+    <div class="card-body">
+      <div class="table-responsive" style="width: 100%; max-height: 20em;">
+        <table class="table table-hover" style="cursor: pointer;">
+          <thead>
+          <tr>
+            <th>SysID</th>
+
+<!--            <th>Customer Email</th>-->
+            <th>{{uiElementService.uiElements.at(69)}}</th>
+
+<!--            <th>Date</th>-->
+            <th>{{uiElementService.uiElements.at(70)}}</th>
+
+            <!--            <th>Qty</th>-->
+            <th>{{uiElementService.uiElements.at(47)}}</th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let order of orders; let index = index;" (click)="goToOrderById(order.orderId)">
+            <td>{{order.orderId}}</td>
+            <td>{{order.email}}</td>
+            <td>{{order.createdDate}}</td>
+            <td>
+              <ng-container *ngFor="let cell of order.cartCells">
+                @if (cell.product.productId === product.productId) {
+                  {{cell.quantity}}
+                }
+              </ng-container>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- === BOTTOM BUTTONS === -->
+  <div class="card" style="margin-top: 1em;">
+    <div class="card-body">
+      <!-- **** LONG RETURN BUTTON **** -->
+      <button  class="btn btn-sm btn-outline-primary" type="button" (click)="returnToViewMode()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
+        </svg>
+
+<!--        Return / cancel-->
+        {{uiElementService.uiElements.at(26)}}/{{uiElementService.uiElements.at(29)}}
+
+      </button>
+      <!-- **** end of return button **** -->
+      <!-- **** save **** -->
+
+<!--      &nbsp;<button class="btn btn-sm btn-primary " (click)="updateProduct(); _seeDeleteQuestion = false; _showAfterUpdatedMessage = false">Save</button>-->
+      &nbsp;<button class="btn btn-sm btn-primary" (click)="updateProduct(); _seeDeleteQuestion = false; _showAfterUpdatedMessage = false">
+      &nbsp; &nbsp; &nbsp;{{uiElementService.uiElements.at(27)}}&nbsp; &nbsp; &nbsp;</button>
+
+      <!-- **** cancel **** -->
+<!--      &nbsp;<button class="btn btn-sm btn-outline-primary" (click)="returnToViewMode()">Cancel</button>-->
+      <!-- **** delete **** -->
+
+<!--      &nbsp;<button *ngIf="orders.length === 0" class="btn btn-sm btn-danger" (click)="_seeDeleteQuestion = true;">Delete</button>-->
+      &nbsp;<button *ngIf="orders.length === 0" class="btn btn-sm btn-danger" (click)="_seeDeleteQuestion = true;">{{uiElementService.uiElements.at(54)}}</button>
+
+    </div>
+    <div class="card-footer" *ngIf="_seeDeleteQuestion">
+
+<!--        <p><span class="text-danger">Danger!</span> Are you sure to delete the product?</p>-->
+        <p><span class="text-danger">{{uiElementService.uiElements.at(36)}}!</span> {{uiElementService.uiElements.at(65)}}?</p>
+
+
+        <div class="d-flex">
+
+<!--          <button class="btn btn-sm btn-outline-primary  me-auto" (click)="_seeDeleteQuestion = false;">No, cancel</button>-->
+          <button class="btn btn-sm btn-outline-primary  me-auto" (click)="_seeDeleteQuestion = false;">{{uiElementService.uiElements.at(38)}}</button>
+
+<!--          <button class="btn btn-sm btn-danger " (click)="deleteProductSecondStepProcess(); _seeDeleteQuestion = false;">Yes, delete</button>-->
+          <button class="btn btn-sm btn-danger " (click)="deleteProductSecondStepProcess(); _seeDeleteQuestion = false;">{{uiElementService.uiElements.at(39)}}</button>
+
+        </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+

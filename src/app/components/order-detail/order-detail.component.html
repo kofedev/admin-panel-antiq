@@ -1,0 +1,139 @@
+<div class="container">
+<p></p>
+@if (order) {
+  <div class="card">
+
+<!--    <div class="card-header"><h6>ORDER. Date (GMT): {{order.createdDate | date:'short':'GMT'}}</h6></div>-->
+    <div class="card-header"><h6>{{uiElementService.uiElements.at(161)}}. {{uiElementService.uiElements.at(70)}} (GMT): {{order.createdDate | date:'short':'GMT'}}</h6></div>
+
+    <div class="card-body">
+      <p>System ID: {{order.orderId}}</p>
+
+<!--      <p class="">Created date: {{ order.createdDate }}</p>-->
+      <p class="">{{uiElementService.uiElements.at(70)}}: {{ order.createdDate }}</p>
+
+      <p>
+        @if (order.active) {
+
+<!--          <span class="text-danger">&#x25cf; Order is active</span>-->
+          <span class="text-danger">&#x25cf; {{uiElementService.uiElements.at(127)}}</span>
+
+<!--          &nbsp;<button class="btn btn-sm btn-outline-primary" (click)="status = false; saveStatus();">Close order</button>-->
+          &nbsp;<button class="btn btn-sm btn-outline-primary" (click)="status = false; saveStatus();">{{uiElementService.uiElements.at(153)}}</button>
+
+        } @else {
+
+<!--          <span class="text-primary">Order closed</span>-->
+          <span class="text-primary">{{uiElementService.uiElements.at(152)}}</span>
+
+<!--          &nbsp;<button class="btn btn-sm btn-outline-primary" (click)="status = true; saveStatus();">Open order</button>-->
+          &nbsp;<button class="btn btn-sm btn-outline-primary" (click)="status = true; saveStatus();">{{uiElementService.uiElements.at(154)}}</button>
+
+        }
+      </p>
+      <div class="card">
+
+<!--        <div class="card-header"><h6>Customer data</h6></div>-->
+        <div class="card-header"><h6>{{uiElementService.uiElements.at(155)}}</h6></div>
+
+        <div class="card-body">
+
+          <p>Email: <a href="mailto:{{order.email}}"><strong>{{order.email}}</strong></a></p>
+
+          <p>IP: {{order.ipAddress}}</p>
+
+<!--          <p class="">Name: {{order.name}}</p>-->
+          <p class="">{{uiElementService.uiElements.at(87)}}: {{order.name}}</p>
+
+<!--          <p class="">Phone: {{order.phone}}</p>-->
+          <p class="">{{uiElementService.uiElements.at(151)}}: {{order.phone}}</p>
+
+<!--          <p class="">Language: {{ order.languageCode }}</p>-->
+          <p class="">{{uiElementService.uiElements.at(90)}}: {{ order.languageCode }}</p>
+
+<!--          <p class="">Message: {{ order.message }}</p>-->
+          <p class="">{{uiElementService.uiElements.at(156)}}: {{ order.message }}</p>
+
+        </div>
+      </div>
+      <p></p>
+      <div class="card">
+
+<!--        <div class="card-header"><h6>Product list</h6></div>-->
+        <div class="card-header"><h6>{{uiElementService.uiElements.at(160)}}</h6></div>
+
+        <div class="card-body">
+          <div class="table-responsive" style="width: 100%; max-height: 20em;">
+            <table class="table table-hover" style="cursor: pointer;">
+              <thead>
+              <tr>
+                <th>SysID</th>
+
+<!--                <th>Title</th>-->
+                <th>{{uiElementService.uiElements.at(45)}}</th>
+
+<!--                <th>Price</th>-->
+                <th>{{uiElementService.uiElements.at(46)}}</th>
+
+<!--                <th>Qty</th>-->
+                <th>{{uiElementService.uiElements.at(47)}}</th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let cell of order.cartCells  ; let index = index;" (click)="goToProductById(cell.product.productId)">
+                <td>{{cell.product.productId}}</td>
+                <td>
+                  <ng-container *ngFor="let descr of cell.product.titleDescriptors">
+                    @if (descr.language.languageId === currentLanguageService.currentLanguage.languageId) {
+                      {{ descr.value }}
+                    }
+                  </ng-container>
+                </td>
+                <td>{{cell.product.offerPrice}}</td>
+                <td>{{cell.quantity}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <p></p>
+      <div class="input-group">
+
+<!--        <span class="input-group-text">Note</span>-->
+        <span class="input-group-text">{{uiElementService.uiElements.at(59)}}</span>
+
+<!--        <input type="text" class="form-control" [(ngModel)]="note" maxlength="250">-->
+        <textarea class="form-control" [(ngModel)]="note" maxlength="254"></textarea>
+
+
+<!--        <button class="btn btn-sm btn-primary" (click)="saveNote()">Save note</button>-->
+        <button class="btn btn-sm btn-primary" (click)="saveNote()">{{uiElementService.uiElements.at(157)}}</button>
+
+      </div>
+    </div>
+    <div class="card-footer">
+      @if(auth.user.getValue()?.roles?.includes("Admin") && !deleteOrderAskToProcessing) {
+
+<!--        <button (click)="deleteOrderAskToProcessing = true" class="btn btn-sm btn-danger">Delete order</button>-->
+        <button (click)="deleteOrderAskToProcessing = true" class="btn btn-sm btn-danger">{{uiElementService.uiElements.at(158)}}</button>
+
+      }
+      @if(deleteOrderAskToProcessing) {
+<!--        <h6><span class="text-danger">DANGER!</span> Are you sure to delete the order?</h6>-->
+        <h6><span class="text-danger">{{uiElementService.uiElements.at(36)}}!</span> {{uiElementService.uiElements.at(159)}}?</h6>
+        <div class="d-flex">
+
+<!--          <button (click)="deleteOrderAskToProcessing = false" class="btn btn-sm btn-primary me-auto">NO, cancel</button>-->
+          <button (click)="deleteOrderAskToProcessing = false" class="btn btn-sm btn-primary me-auto">{{uiElementService.uiElements.at(38)}}</button>
+
+<!--          <button (click)="deleteOrderAskToProcessing = false; deleteOrder()" class="btn btn-sm btn-outline-danger">Yes, delete</button>-->
+          <button (click)="deleteOrderAskToProcessing = false; deleteOrder()" class="btn btn-sm btn-outline-danger">{{uiElementService.uiElements.at(39)}}</button>
+
+        </div>
+      }
+    </div>
+  </div>
+}
+</div>

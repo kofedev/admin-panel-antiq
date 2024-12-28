@@ -1,0 +1,17 @@
+<div class="container">
+  <p></p>
+
+<!--  <h5>Welcome to the Kalba Admin Panel</h5>-->
+  <h5>{{uiElementService.uiElements.at(71)}}</h5>
+
+  <p></p>
+  @if(stat) {
+
+<!--    <h6 class="text-danger">Active orders: {{stat.activeOrders}}</h6>-->
+    <h6 class="text-danger">{{uiElementService.uiElements.at(72)}}: {{stat.activeOrders}}</h6>
+
+<!--    <h6 class="text-primary">Total orders: {{stat.totalOrders}}</h6>-->
+    <h6 class="text-primary">{{uiElementService.uiElements.at(73)}}: {{stat.totalOrders}}</h6>
+
+  }
+</div>

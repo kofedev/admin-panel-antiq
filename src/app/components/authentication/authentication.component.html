@@ -1,0 +1,89 @@
+<div *ngIf="mode === 'login'"
+  class="container d-flex justify-content-center align-items-center" style="margin-top: 3em;">
+
+    <div class="card">
+      <form [formGroup]="loginFormGroup" method="post">
+        <div class="card-body">
+
+          <div class="form-group">
+            <label class="text-muted">Email</label>
+
+            <input type="email" class="form-control form-font rounded-0 mt-1 mb-3"
+                   [ngClass]="{'is-invalid': submitted && loginFormGroup.controls['username'].errors}"
+                   formControlName="username">
+
+            <div *ngIf="submitted && loginFormGroup.get('username')?.errors" class="invalid-feedback">
+              <div *ngIf="loginFormGroup.get('username')!.errors?.['required']">
+                Email is Required
+              </div>
+              <div *ngIf="loginFormGroup.get('username')!.errors?.['pattern']">
+                Please Enter a valid Email
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="text-muted">Password</label>
+            <input type="password" class="form-control form-font rounded-0 mt-1 mb-3"
+                   [ngClass]="{'is-invalid':submitted && loginFormGroup.controls['password'].errors}"
+                   formControlName="password">
+            <div *ngIf="submitted && loginFormGroup.get('password')?.errors" class="invalid-feedback">
+              <div *ngIf="loginFormGroup.get('password')!.errors?.['required']">
+                Password is Required
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="card-footer d-flex">
+          <button type="button" (click)="onLogin()" class="btn btn-sm btn-primary p-2 me-auto">
+            &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;Login&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</button>
+          <button type="button" (click)="mode = 'restore'" class="btn btn-sm btn-outline-primary p-2">Restore</button>
+        </div>
+      </form>
+
+      <ng-container *ngIf="errorMessage">
+        <div class="alert alert-danger">
+          {{errorMessage}}
+        </div>
+      </ng-container>
+
+    </div>
+
+</div>
+
+<div *ngIf="mode === 'restore'"
+     class="container d-flex justify-content-center align-items-center" style="margin-top: 3em;">
+
+  <div class="card" *ngIf="!_inProgress; else inProgress">
+      <div class="card-body">
+        <p>We're going to restore the password for: <b>{{loginFormGroup.value.username}}</b>, right?</p>
+      </div>
+      <div class="card-footer d-flex">
+            <button type="button" (click)="restorePassByEmail()" class="btn btn-sm btn-primary p-2 me-auto">Restore</button>
+            <button type="button" (click)="mode = 'login'" class="btn btn-sm btn-outline-primary p-2">Cancel</button>
+      </div>
+  </div>
+
+  <ng-template #inProgress>
+    <div class="d-flex justify-content-center align-items-center" style="height: 20vh;">
+      <div class="text-center">
+        <div class="d-flex align-items-center">
+          in progress...&nbsp;&nbsp;
+          <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+</div>
+
+<div *ngIf="mode === 'after_restore'" class="container">
+  <p>&nbsp;</p>
+  <div class="card">
+    <div class="card-body">
+      <p>{{_message}}</p>
+      <p><button type="button" (click)="mode = 'login'" class="btn btn-sm btn-outline-primary">Login</button></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+
+//////////////////////////////////////////////////////
+
+
+.engine_image {
+  width: 24em;
+  //height: 18em;
+  position: relative
+}
+
+// custom button to control image:
+
+.ctrl-img-button {
+  display: inline-block;
+  padding: 2px 2px;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid #123C69;
+  border-radius: 6px;
+  color: #123C69;
+  background-color: #F8F8F8;
+}
+
+/* Hover State */
+.ctrl-img-button:hover {
+  color: white;
+  background-color: #123C69;
+}
+
+/* Active State */
+.ctrl-img-button:active {
+  color: white;
+  background-color: #123C69;
+}
+

@@ -1,0 +1,265 @@
+<div class="container" *ngIf="category != undefined" xmlns="http://www.w3.org/1999/html">
+
+  <div class="card" style="margin-top: 1em;">
+    <div class="card-header">
+
+<!--      <span class="text-primary"><strong>CATEGORY EDITOR:</strong>&nbsp;system ID: {{ category.categoryId }}</span>-->
+      <span class="text-primary"><strong>{{uiElementService.uiElements.at(10)}}:</strong>&nbsp;system ID: {{ category.categoryId }}</span>
+
+    </div>
+    <div class="card-body">
+      <span>
+
+        <!--        Active status:-->
+        {{uiElementService.uiElements.at(11)}}:
+
+<!--        <span *ngIf="category.active" class="text-success">active</span>-->
+        <span *ngIf="category.active" class="text-success">{{uiElementService.uiElements.at(12)}}</span>
+
+<!--        <span *ngIf="!category.active" class="text-danger">inactive</span>-->
+        <span *ngIf="!category.active" class="text-danger">{{uiElementService.uiElements.at(13)}}</span>
+
+      </span>
+      <p></p>
+      <!------- active status ------->
+      <div *ngIf="category.active">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="" id="f1" checked>
+          <label class="form-check-label" for="f1">
+
+<!--            <span class="text-bg-primary">Category is active</span>-->
+            <span class="text-bg-primary">{{uiElementService.uiElements.at(14)}}</span>
+
+          </label>
+        </div>
+        <div class="form-check">
+          <input (click)="category.active = false" class="form-check-input" type="radio" name="" id="f2">
+          <label class="form-check-label" for="f2">
+
+<!--            <span class="text-primary">Category is inactive</span>-->
+            <span class="text-primary">{{uiElementService.uiElements.at(15)}}</span>
+
+          </label>
+        </div>
+      </div>
+      <div *ngIf="!category.active">
+        <div class="form-check">
+          <input (click)="category.active = true" class="form-check-input" type="radio" name="" id="f1a">
+          <label class="form-check-label" for="f1a">
+
+<!--            <span class="text-primary">Category is active</span>-->
+            <span class="text-primary">{{uiElementService.uiElements.at(14)}}</span>
+
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="" id="f2a" checked>
+          <label class="form-check-label" for="f2a">
+
+<!--            <span class="text-bg-primary">Category is inactive</span>-->
+            <span class="text-bg-primary">{{uiElementService.uiElements.at(15)}}</span>
+
+          </label>
+        </div>
+      </div>
+      <!-- end of active status -->
+    </div>
+  </div>
+  <!-- *** LOCATION *** -->
+  <div class="card" style="margin-top: 1em;">
+    <div class="card-header">
+
+<!--      <span class="text-primary"><strong>Location</strong>&nbsp;-->
+      <span class="text-primary"><strong>{{uiElementService.uiElements.at(16)}}</strong>&nbsp;
+
+        <span *ngIf="originalParentID != category.parent.categoryId" class="text-danger">
+
+          <!--          (new)-->
+          ({{uiElementService.uiElements.at(17)}})
+
+        </span>
+      </span>
+    </div>
+    <div class="card-body">
+      <!-- *** Parent Information *** -->
+<!--      <p>Parent ID: {{ category.parent.categoryId }}</p>-->
+
+<!--      <div *ngIf="category.root"><h6>This is a root category</h6></div>-->
+      <div *ngIf="category.root"><h6>{{uiElementService.uiElements.at(18)}}</h6></div>
+
+      <div *ngIf="!category.root">
+        <div *ngIf="category.parent.root">
+
+<!--          <h6>Parent category: <span class="text-muted">Root</span></h6>-->
+          <h6>{{uiElementService.uiElements.at(19)}}: <span class="text-muted">{{uiElementService.uiElements.at(20)}}</span></h6>
+
+        </div>
+        <div *ngIf="!category.parent.root">
+
+<!--          <h6>Parent title:-->
+          <h6>{{uiElementService.uiElements.at(21)}}:
+
+            <span class="text-muted" *ngFor="let descriptor of category.parent.titleDescriptors">
+              <span *ngIf="descriptor.language.languageId === currentLanguageService.currentLanguage.languageId">
+                {{ descriptor.value }}
+              </span>
+            </span>
+          </h6>
+        </div>
+      </div>
+      <p></p>
+      <div *ngIf="!_showCategoryTreeToSelectNewLocation">
+
+<!--        <button class="btn btn-sm btn-secondary" type="button" (click)="_showCategoryTreeToSelectNewLocation = true; setCurrentCategoryInTree()">Relocation show</button>-->
+        <button class="btn btn-sm btn-secondary" type="button" (click)="_showCategoryTreeToSelectNewLocation = true; setCurrentCategoryInTree()">{{uiElementService.uiElements.at(41)}}</button>
+
+      </div>
+      <div *ngIf="_showCategoryTreeToSelectNewLocation" class="">
+
+<!--        <button class="btn btn-sm btn-outline-secondary" type="button" (click)="_showCategoryTreeToSelectNewLocation = false">Relocation hide</button>-->
+        <button class="btn btn-sm btn-outline-secondary" type="button" (click)="_showCategoryTreeToSelectNewLocation = false">{{uiElementService.uiElements.at(42)}}</button>
+
+        <!-- *** Category Tree Integration *** -->
+        <div style="margin-top: 1em;">
+          <app-category-tree [currentCategory]="parentCategory"></app-category-tree>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- *** DESCRIPTORS *** -->
+  <div class="card" style="margin-top: 1em;">
+    <div class="card-header">
+
+<!--      <span class="text-primary"><strong>Multilingual descriptors:</strong></span>-->
+      <span class="text-primary"><strong>{{uiElementService.uiElements.at(22)}}:</strong></span>
+
+    </div>
+    <div class="card-body">
+      <div *ngFor="let descriptor of category.titleDescriptors | sortDescriptorsByLanguage" style="margin-top: 1em;">
+        <div style="margin-bottom: 1em;">
+          <app-descriptor-editor [descriptor]="descriptor"></app-descriptor-editor>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === MESSAGE AFTER UPDATE ================== -->
+  <div *ngIf="_showAfterUpdatedMessage" style="margin-top: 1em;">
+    <div class="card bg-body-secondary" (click)="_showAfterUpdatedMessage = false">
+
+<!--      <div class="container text-primary"><p></p>Category has been saved / updated-->
+      <div class="container text-primary"><p></p>{{uiElementService.uiElements.at(23)}}
+
+<!--        &nbsp;<button (click)="_showAfterUpdatedMessage = false" type="button" class="btn btn-sm btn-outline-primary me-2 m-auto">Ok</button>-->
+        &nbsp;<button (click)="_showAfterUpdatedMessage = false" type="button" class="btn btn-sm btn-outline-primary me-2 m-auto">{{uiElementService.uiElements.at(24)}}</button>
+
+      </div>
+      <p></p>
+    </div>
+  </div>
+  <!-- === END OF MESSAGE AFTER UPDATE =========== -->
+  <!-- === MESSAGE: NO POSSIBLE TO RELOCATE ========== -->
+  <div *ngIf="_itIsNoPossibleToRelocateShowMessage" style="margin-top: 1em;">
+    <div class="card bg-body-secondary" (click)="_itIsNoPossibleToRelocateShowMessage = false">
+
+<!--      <div class="container text-primary"><p></p>It is impossible to relocate a category into itself or into its "successor"-->
+      <div class="container text-primary"><p></p>{{uiElementService.uiElements.at(25)}}
+
+<!--        <button (click)="_itIsNoPossibleToRelocateShowMessage = false" type="button" class="btn btn-sm btn-outline-primary me-2 m-auto">Ok</button>-->
+        <button (click)="_itIsNoPossibleToRelocateShowMessage = false" type="button" class="btn btn-sm btn-outline-primary me-2 m-auto">{{uiElementService.uiElements.at(24)}}</button>
+
+      </div>
+      <p></p>
+    </div>
+  </div>
+  <!-- === END OF MESSAGE: NO POSSIBLE TO RELOCATE =========== -->
+  <!-- *** BUTTONS *** -->
+  <div class="card" style="margin-top: 1em;">
+    <div class="card-body">
+      <!-- **** LONG RETURN BUTTON **** -->
+      <button  class="btn btn-sm btn-outline-primary" type="button" (click)="returnToViewMode()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
+        </svg>
+<!--        Return-->
+        {{uiElementService.uiElements.at(26)}}
+      </button>
+      <!-- **** end of return button **** -->
+      <!-- **** save button **** -->
+
+<!--      &nbsp;<button class="btn btn-sm btn-primary" type="button" (click)="updateCategory(); _askToDelete = false">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>-->
+      &nbsp;<button class="btn btn-sm btn-primary" type="button" (click)="updateCategory(); _askToDelete = false">&nbsp;&nbsp; &nbsp;&nbsp;{{uiElementService.uiElements.at(27)}}&nbsp;&nbsp;&nbsp; &nbsp;</button>
+
+      <!-- **** undo button **** -->
+      &nbsp;<button class="btn btn-sm btn-outline-primary" type="button" (click)="unDoData(); _showCategoryTreeToSelectNewLocation = false; _askToDelete = false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+              <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+            </svg>
+<!--      undo-->
+      {{uiElementService.uiElements.at(28)}}
+      </button>
+      <!-- **** cancel button **** -->
+
+<!--      &nbsp;<button class="btn btn-sm btn-outline-primary" type="button" (click)="returnToViewMode()">Cancel</button>-->
+      &nbsp;<button class="btn btn-sm btn-outline-primary" type="button" (click)="returnToViewMode()">{{uiElementService.uiElements.at(29)}}</button>
+
+      <!-- **** delete button **** -->
+      <div *ngIf="authService.user.getValue()!.roles.includes('Admin')" class="input-group mb-3" style="max-width: 15em; margin-top: 2em;">
+
+<!--           <button class="btn btn-sm btn-danger" type="button" (click)="_askToDelete = true">Delete category</button>-->
+           <button class="btn btn-sm btn-danger" type="button" (click)="_askToDelete = true">{{uiElementService.uiElements.at(30)}}</button>
+
+      </div>
+    </div>
+    <div class="card-footer" *ngIf="_askToDelete">
+        <!-- non-empty category -->
+        <span *ngIf="!isCategoryEmpty()">
+
+<!--            <span class="text-danger">Attention!</span> It is not possible to delete a non-empty category.&nbsp;-->
+            <span class="text-danger">{{uiElementService.uiElements.at(31)}}!</span> {{uiElementService.uiElements.at(32)}}.&nbsp;
+
+            <span *ngIf="category.products">
+                <span *ngIf="category.products.length">
+
+<!--                    <span *ngIf="category.products.length > 0">The category contains {{category.products.length}} products.&nbsp;</span>-->
+                    <span *ngIf="category.products.length > 0">{{uiElementService.uiElements.at(33)}} {{category.products.length}} {{uiElementService.uiElements.at(34)}}.&nbsp;</span>
+
+                </span>
+            </span>
+            <span *ngIf="category.subcategories">
+                <span *ngIf="category.subcategories.length">
+
+<!--                  <span *ngIf="category.subcategories.length > 0">The category contains {{category.subcategories.length}} subcategories.</span>-->
+                  <span *ngIf="category.subcategories.length > 0">{{uiElementService.uiElements.at(33)}} {{category.subcategories.length}} {{uiElementService.uiElements.at(35)}}.</span>
+
+                </span>
+            </span>
+          <hr>
+
+<!--          <button class="btn btn-sm btn-outline-primary p-2 me-auto" type="button" (click)="_askToDelete = false">Cancel</button>-->
+          <button class="btn btn-sm btn-outline-primary p-2 me-auto" type="button" (click)="_askToDelete = false">{{uiElementService.uiElements.at(29)}}</button>
+
+        </span>
+      <!-- empty category -->
+      <span *ngIf="isCategoryEmpty()">
+
+<!--        <span class="text-danger">Danger!</span> Are you sure to delete the category?-->
+        <span class="text-danger">{{uiElementService.uiElements.at(36)}}!</span> {{uiElementService.uiElements.at(37)}}
+
+      </span>
+      <hr>
+      <div class="d-flex" *ngIf="isCategoryEmpty()">
+
+<!--        <button class="btn btn-sm btn-outline-primary p-2 me-auto" type="button" (click)="_askToDelete = false">No, cancel</button>-->
+        <button class="btn btn-sm btn-outline-primary p-2 me-auto" type="button" (click)="_askToDelete = false">{{uiElementService.uiElements.at(38)}}</button>
+
+<!--        <button class="btn btn-sm btn-danger p-2" type="button" (click)="deleteCategoryProcess(); _askToDelete = false">Yes, delete</button>-->
+        <button class="btn btn-sm btn-danger p-2" type="button" (click)="deleteCategoryProcess(); _askToDelete = false">{{uiElementService.uiElements.at(39)}}</button>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+

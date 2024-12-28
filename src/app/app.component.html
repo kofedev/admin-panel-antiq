@@ -1,0 +1,104 @@
+<div *ngIf="ready; else loading">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink=""><span class="text-primary" style="font-size: xx-large;">kalba</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+
+            <!--        <a routerLink="order" class ="nav-link active" aria-current="page"><span>Orders</span></a>-->
+            <a routerLink="order" class ="nav-link active" aria-current="page"><span>{{uiElementService.uiElements.at(0)}}</span></a>
+
+          </li>
+          <li class="nav-item">
+
+<!--            <a routerLink="category" class ="nav-link active" aria-current="page"><span>Categories</span></a>-->
+            <a routerLink="category" class ="nav-link active" aria-current="page"><span>{{uiElementService.uiElements.at(1)}}</span></a>
+
+          </li>
+          <li class="nav-item">
+
+<!--            <a routerLink="product" class ="nav-link active" aria-current="page"><span>Products</span></a>-->
+            <a routerLink="product" class ="nav-link active" aria-current="page"><span>{{uiElementService.uiElements.at(2)}}</span></a>
+
+          </li>
+          <!-- **** DROPDOWN MENU **** -->
+          <li class="nav-item dropdown">
+
+<!--            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>-->
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{uiElementService.uiElements.at(3)}}</a>
+
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+<!--              <li><a routerLink="ui-elements" class="dropdown-item">Short UI Elements</a></li>-->
+              <li><a routerLink="ui-elements" class="dropdown-item">{{uiElementService.uiElements.at(4)}}</a></li>
+
+<!--              <li><a routerLink="ui-elements-big" class="dropdown-item">Big Elements</a></li>-->
+              <li><a routerLink="ui-elements-big" class="dropdown-item">{{uiElementService.uiElements.at(5)}}</a></li>
+
+<!--              <li><a routerLink="language" class="dropdown-item">Languages</a></li>-->
+              <li><a routerLink="language" class="dropdown-item">{{uiElementService.uiElements.at(6)}}</a></li>
+
+<!--              <li><a routerLink="staff" class="dropdown-item">Staff</a></li>-->
+              <li><a routerLink="staff" class="dropdown-item">{{uiElementService.uiElements.at(7)}}</a></li>
+
+<!--              <li><a routerLink="tools" class="dropdown-item">Tools</a></li>-->
+              <li><a routerLink="tools" class="dropdown-item">{{uiElementService.uiElements.at(8)}}</a></li>
+
+              <!--              <li><a routerLink="tools" class="dropdown-item">Info & Docs</a></li>-->
+              <li><a routerLink="about" class="dropdown-item">{{uiElementService.uiElements.at(122)}}</a></li>
+
+            </ul>
+          </li>
+          <!-- **** DROPDOWN MENU **** -->
+          <li class="nav-item">
+            <app-language-selector></app-language-selector>
+          </li>
+          <li class="nav-item">
+            <a routerLink="account" class="nav-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+                <path d="M7.5 1v7h1V1h-1z"/>
+                <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div class="wrapper">
+      <div class="main">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </main>
+  <!-- ======== FOOTER ======== font-size: small;  -->
+  <footer class="footer mt-auto py-0">
+    <hr>
+    <div class="container text-center" style="padding-top: 0px; padding-bottom: 15px; font-size: small;  ">
+      <span class="logo-top text-primary">kalba</span>
+      <span class="text-muted"> multilingual engine | admin panel mk2</span>
+      <br>
+      <span class="text-muted" *ngIf="authService.user.value?.username">
+        current user: <span class="text-primary">{{authService.user.value?.username}}</span> |
+        role: <span class="text-primary">{{authService.user.value?.roles}}</span>
+        <br></span>
+      <br>
+      <a href="https://kalba.co"><img src="assets/img/2.png" width="25px" height="24px" style="opacity: 0.6;"></a>
+    </div>
+  </footer>
+</div>
+<ng-template #loading>
+  <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="text-center">
+      <div class="d-flex align-items-center">
+        Loading...&nbsp;&nbsp;
+        <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>

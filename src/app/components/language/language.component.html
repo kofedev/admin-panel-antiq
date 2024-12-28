@@ -1,0 +1,70 @@
+<div class="container">
+  <p></p>
+  <h5>{{uiElementService.uiElements.at(6)}}</h5>
+  <p></p>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered" style="cursor: pointer; width: 100%;">
+      <thead>
+      <tr>
+        <th style="max-width: fit-content;" scope="col">ID</th>
+
+<!--        <th style=";" scope="col">Code 91</th>-->
+        <th style=";" scope="col">{{uiElementService.uiElements.at(91)}}</th>
+
+<!--        <th style=";" scope="col">Status 125</th>-->
+        <th style=";" scope="col">{{uiElementService.uiElements.at(125)}}</th>
+
+<!--        <th style=";" scope="col">Name 92</th>-->
+        <th style=";" scope="col">{{uiElementService.uiElements.at(92)}}</th>
+
+<!--        <th style=";" scope="col">Active 11</th>-->
+        <th style=";" scope="col">{{uiElementService.uiElements.at(11)}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let language of languages; let index = index;">
+        <td (click)="goToEditLanguage(language.languageId)">{{ language.languageId }}</td>
+        <td (click)="goToEditLanguage(language.languageId)">{{ language.languageCode }}</td>
+        <td (click)="goToEditLanguage(language.languageId)">
+
+<!--          <div *ngIf="language.byDefault"><span class="text-bg-primary">Default 124</span></div>-->
+          <div *ngIf="language.byDefault"><span class="text-bg-primary">{{uiElementService.uiElements.at(124)}}</span></div>
+
+<!--          <div *ngIf="language.isInitial"><span class="text-bg-primary">Initial 126</span></div>-->
+          <div *ngIf="language.isInitial"><span class="text-bg-primary">{{uiElementService.uiElements.at(126)}}</span></div>
+
+        </td>
+        <td (click)="goToEditLanguage(language.languageId)">{{ language.languageName }}</td>
+        <td (click)="goToEditLanguage(language.languageId)">
+
+<!--          <span *ngIf="language.isActive" class="text-success">Active 12</span>-->
+          <span *ngIf="language.isActive" class="text-success">{{uiElementService.uiElements.at(127)}}</span>
+
+<!--          <span *ngIf="!language.isActive" class="text-danger">Inactive 13</span>-->
+          <span *ngIf="!language.isActive" class="text-danger">{{uiElementService.uiElements.at(128)}}</span>
+
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="dropdown">
+
+<!--    <button class="btn btn-sm btn-primary" type="button" (click)="goToRegisterNewLanguage()">Register New Language 123</button>-->
+    <button class="btn btn-sm btn-primary" type="button" (click)="goToRegisterNewLanguage()">{{uiElementService.uiElements.at(123)}}</button>
+
+    &nbsp;<button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+<!--      Set default 89-->
+    {{uiElementService.uiElements.at(89)}}
+    </button>
+    <ul class="dropdown-menu">
+      <li *ngFor="let language of languages">
+        <span class="dropdown-item" (click)="setDefaultLanguage(language)" *ngIf="language.isActive">{{ language.languageCode }}</span>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+

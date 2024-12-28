@@ -1,0 +1,107 @@
+<div *ngIf="currentCategory && categoryId && productList" class="container">
+  <!-- **** end of new product button **** -->
+  <p></p>
+  <!-- *** CATEGORY TREE *** -->
+  <div >
+    <app-category-tree [currentCategory]="currentCategory"></app-category-tree>
+  </div>
+  <!-- **** end of category tree **** -->
+  <!-- *** PRODUCTS IN THIS CATEGORY *** -->
+  <div class="card" style="margin-top: 1em;">
+
+    <div class="card-header d-flex">
+      <div class="p-0 me-auto">
+
+<!--        <button class="btn btn-sm btn-primary" (click)="createNewEmptyProduct(currentCategory)">New product</button>-->
+        <button class="btn btn-sm btn-primary" (click)="createNewEmptyProduct(currentCategory)">{{uiElementService.uiElements.at(44)}}</button>
+
+      </div>
+      <div class="form-check form-switch p-0">
+        <input *ngIf="!_showClone" (click)="_showClone = !_showClone" class="form-check-input" type="checkbox">
+        <input *ngIf="_showClone" (click)="_showClone = !_showClone" class="form-check-input" type="checkbox" checked>
+<!--
+    <span *ngIf="!_showClone" class="text-muted">clone</span>-->
+        <span *ngIf="!_showClone" class="text-muted">{{uiElementService.uiElements.at(48)}}</span>
+
+<!--        <span *ngIf="_showClone" class="text-primary">clone</span>-->
+        <span *ngIf="_showClone" class="text-primary">{{uiElementService.uiElements.at(48)}}</span>
+
+      </div>
+    </div>
+
+    @if(!_inProgress) {
+
+    <div class="card-body">
+
+        <!--      <p><strong>Products</strong></p>-->
+        <p><strong>{{uiElementService.uiElements.at(2)}}</strong></p>
+
+        <div class="table-responsive" style="height: 30em;">
+          <table class="table table-hover " style="cursor: pointer; max-width: fit-content;">
+            <thead *ngIf="productList.length > 0">
+            <tr>
+              <!--            <th>Id</th>-->
+
+              <!--            <th>Title</th>-->
+              <th>{{uiElementService.uiElements.at(45)}}</th>
+
+              <th></th>
+
+              <!--            <th>Price</th>-->
+              <th>{{uiElementService.uiElements.at(46)}}</th>
+
+              <!--            <th>Qty</th>-->
+              <th>{{uiElementService.uiElements.at(47)}}</th>
+
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let product of productList | sortProductsByTitle; let index = index;">
+              <!--            <td (click)="goToProductById(product.productId)">{{ product.productId }}</td>-->
+              <td (click)="goToProductById(product.productId)"><span *ngIf="product.active">{{ product.title! }}</span><span *ngIf="!product.active" class="text-muted">{{ product.title! }}</span></td>
+              <td (click)="goToProductById(product.productId)"><span *ngIf="product.active" class="text-success">&#x25cf;</span><span *ngIf="!product.active" class="text-danger">&#x25cf;</span></td>
+              <td (click)="goToProductById(product.productId)">{{ product.offerPrice }}</td>
+              <td (click)="goToProductById(product.productId)">{{ product.currentQuantity }}</td>
+
+              <td (click)="cloneProduct(product.productId)" *ngIf="_showClone" class="text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+                  <title>Clone</title>
+                  <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+                </svg>
+              </td>
+              <td *ngIf="!_showClone" class="text-muted" style="visibility: hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+                  <title>Clone off</title>
+                  <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+                </svg>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+    </div>
+
+    } @else {
+
+      <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
+        <div class="text-center">
+          <div class="d-flex align-items-start" style="margin-top: 10em; margin-bottom: 10em;">
+            <!--      Loading...&nbsp;&nbsp;-->
+            {{uiElementService.uiElements.at(194)}}...&nbsp;&nbsp;
+            <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+
+    }
+
+  </div>
+  <!-- **** end of list of products **** -->
+
+</div> <!-- MAIN CONTAINER -->
+
+
+
+

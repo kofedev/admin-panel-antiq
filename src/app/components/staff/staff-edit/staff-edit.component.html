@@ -1,0 +1,189 @@
+<div *ngIf="staffEmail !== undefined && _staff">
+  <div *ngIf="!_inProgress; else inProgress">
+    <div class="container">
+      <p style="margin-top: 1em;" class="text-danger">{{_message}}</p>
+      <div class="card" style="max-width: 40em;">
+        <div class="card-header">
+
+<!--          <span class="text-primary align-content-center"><b>Staff: </b> {{_staff.user.email}}</span>-->
+          <span class="text-primary align-content-center"><b>{{uiElementService.uiElements.at(7)}}: </b> {{_staff.user.email}}</span>
+
+        </div>
+
+        <!-- === MESSAGE AFTER UPDATE ================== -->
+        <div *ngIf="_showAfterUpdatedMessage" style="margin-top: 1em;">
+          <div class="card bg-body-secondary" (click)="_showAfterUpdatedMessage = false">
+
+<!--            <div class="container text-primary"><p></p>Staff has been saved / updated-->
+            <div class="container text-primary"><p></p>{{uiElementService.uiElements.at(112)}}
+
+              &nbsp;<button (click)="_showAfterUpdatedMessage = false" type="button" class="btn btn-sm btn-outline-primary me-2 m-auto">Ok</button>
+            </div>
+            <p></p>
+          </div>
+        </div>
+        <!-- === END OF MESSAGE AFTER UPDATE =========== -->
+
+        <div class="card-body">
+          <div class="card">
+            <div class="card-body">
+              <div class="input-group mb-3" >
+
+<!--                <span class="input-group-text" id="firstNameLabel" style="min-width: 5em;">First Name</span>-->
+                <span class="input-group-text" id="firstNameLabel" style="min-width: 5em;">{{uiElementService.uiElements.at(99)}}</span>
+
+                <input style="max-width: 25em;" type="text" class="form-control flex-grow-1"
+                       id="firstName" required [(ngModel)]="_newFirstName" name="First Name" maxlength="100" />
+              </div>
+              <div class="input-group mb-3" >
+
+<!--                <span class="input-group-text" id="lastNameLabel" style="min-width: 5em;">Last Name</span>-->
+                <span class="input-group-text" id="lastNameLabel" style="min-width: 5em;">{{uiElementService.uiElements.at(100)}}</span>
+
+                <input style="max-width: 25em;" type="text" class="form-control flex-grow-1"
+                       id="lastName" required [(ngModel)]="_newLastName" name="Last Name" maxlength="100" />
+              </div>
+
+<!--              <button class="btn btn-sm btn-primary" type="button" (click)="updateStaffName()">Update name</button>-->
+              <button class="btn btn-sm btn-primary" type="button" (click)="updateStaffName()">{{uiElementService.uiElements.at(113)}}</button>
+
+              &nbsp;<button class="btn btn-sm btn-outline-primary" type="button" (click)="unDoData(); _message='' ">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+              </svg>
+<!--              undo-->
+              {{uiElementService.uiElements.at(28)}}
+            </button>
+            </div>
+          </div>
+          <div class="card" style="margin-top: 10px;">
+            <div class="card-body">
+              <div class="input-group mb-3" >
+
+<!--                <span class="input-group-text" id="emailLabel" style="min-width: 5em;">Email</span>-->
+                <span class="input-group-text" id="emailLabel" style="min-width: 5em;">{{uiElementService.uiElements.at(101)}}</span>
+
+                <input style="max-width: 25em;" type="email" class="form-control flex-grow-1"
+                       id="email" required [(ngModel)]="_newEmail" name="New Email" maxlength="100" />
+              </div>
+
+<!--              <button class="btn btn-sm btn-primary" type="button" (click)="updateStaffEmail()">Update email</button>-->
+              <button class="btn btn-sm btn-primary" type="button" (click)="updateStaffEmail()">{{uiElementService.uiElements.at(114)}}</button>
+
+              &nbsp;<button class="btn btn-sm btn-outline-primary" type="button" (click)="unDoData(); _message='' ">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+              </svg>
+<!--              undo-->
+              {{uiElementService.uiElements.at(28)}}
+            </button>
+            </div>
+          </div>
+          <div class="card" style="margin-top: 10px;">
+            <div class="card-body">
+              <div class="input-group mb-3" >
+
+<!--                <span class="input-group-text" id="passwordLabel" style="min-width: 5em;">New password</span>-->
+                <span class="input-group-text" id="passwordLabel" style="min-width: 5em;">{{uiElementService.uiElements.at(102)}}</span>
+
+                <input style="max-width: 25em;" type="text" class="form-control flex-grow-1"
+                       id="password" required [(ngModel)]="_newPassword" name="New Password" maxlength="100" />
+              </div>
+
+<!--              <button class="btn btn-sm btn-primary" type="button" (click)="updateStaffPassword()">Update password</button>-->
+              <button class="btn btn-sm btn-primary" type="button" (click)="updateStaffPassword()">{{uiElementService.uiElements.at(102)}}</button>
+
+              &nbsp;<button class="btn btn-sm btn-outline-primary" type="button" (click)="unDoData(); _message='' ">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+              </svg>
+<!--              undo-->
+              {{uiElementService.uiElements.at(28)}}
+            </button>
+            </div>
+          </div>
+
+          <div *ngIf="_staff.user.email != authService.user.value?.username" class="card" style="margin-top: 10px;">
+            <div class="card-body">
+              <p>
+                <span *ngIf="_staff.user.roles.includes('Admin')">{{_staff.user.email}} is <span class="text-primary">Admin</span></span>
+
+
+<!--                <span *ngIf="_staff.user.roles.includes('Staff')">{{_staff.user.email}} is <span class="text-primary">Staff</span></span>-->
+                <span *ngIf="_staff.user.roles.includes('Staff')">{{_staff.user.email}} is <span class="text-primary">{{uiElementService.uiElements.at(7)}}</span></span>
+
+              </p>
+<!--              <button style="" class="btn btn-sm btn-primary" type="button" (click)="updateStaffRole()">Update role</button>-->
+              <button style="" class="btn btn-sm btn-primary" type="button" (click)="updateStaffRole()">{{uiElementService.uiElements.at(117)}}</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: 10px;">
+            <div class="card-body">
+              <p>
+<!--                <span *ngIf="_staff.isReceiverMails">{{_staff.user.email}} <span class="text-success">is new order alerts recipient 119</span></span>-->
+                <span *ngIf="_staff.isReceiverMails">{{_staff.user.email}} <span class="text-success">{{uiElementService.uiElements.at(119)}}</span></span>
+
+<!--                <span *ngIf="!_staff.isReceiverMails">{{_staff.user.email}} <span class="text-danger">is not new order alerts recipient 120</span></span>-->
+                <span *ngIf="!_staff.isReceiverMails">{{_staff.user.email}} <span class="text-danger">{{uiElementService.uiElements.at(120)}}</span></span>
+
+              </p>
+
+<!--              <button class="btn btn-sm btn-primary" type="button" (click)="updateReceiverMailsStatus()">Update status</button>-->
+              <button class="btn btn-sm btn-primary" type="button" (click)="updateReceiverMailsStatus()">{{uiElementService.uiElements.at(116)}}</button>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div *ngIf="_staff.user.email != authService.user.value?.username" class="card-footer">
+          <div *ngIf="!_askToConfirm" class="d-flex">
+
+            <button class="btn btn-sm btn-outline-primary p-1 me-auto" type="button" (click)="returnToViewMode()">
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
+              </svg>
+
+<!--              Return / cancel&nbsp;-->
+              {{uiElementService.uiElements.at(26)}} / {{uiElementService.uiElements.at(29)}}&nbsp;
+            </button>
+
+<!--            <button *ngIf="_staff.user.email != authService.user.value?.username" class="btn btn-sm btn-danger p-1" type="button" (click)="deleteStaff()">&nbsp;Delete staff&nbsp;</button>-->
+            <button *ngIf="_staff.user.email != authService.user.value?.username" class="btn btn-sm btn-danger p-1" type="button" (click)="deleteStaff()">&nbsp;{{uiElementService.uiElements.at(118)}}&nbsp;</button>
+
+          </div>
+          <div *ngIf="_askToConfirm">
+<!--            <h6 class="text-danger">Are you sure to delete staff 121 {{_staff.user.email}}?</h6>-->
+            <h6 class="text-danger">{{uiElementService.uiElements.at(121)}} {{_staff.user.email}}?</h6>
+            <button class="btn btn-sm btn-success" type="button" (click)="_askToConfirm = false">
+<!--              &nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;-->
+              &nbsp;&nbsp;&nbsp;&nbsp;{{uiElementService.uiElements.at(38)}}&nbsp;&nbsp;&nbsp;&nbsp;
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-sm btn-danger" type="button" (click)="deleteStaffProcess()">
+<!--            Yes-->
+            {{uiElementService.uiElements.at(39)}}
+          </button>
+          </div>
+        </div>
+      </div>
+      <p>&nbsp;</p>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #inProgress>
+  <div class="d-flex justify-content-center align-items-center" style="height: 20vh;">
+    <div class="text-center">
+      <div class="d-flex align-items-center">
+        updating...&nbsp;&nbsp;
+        <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>

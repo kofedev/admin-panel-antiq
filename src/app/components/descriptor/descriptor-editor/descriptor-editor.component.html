@@ -1,0 +1,35 @@
+<!-- ###################################################### -->
+<!-- ###################################################### -->
+<!-- ###################################################### -->
+<!-- MAX LENGTH FULL VALUE :: 3000 -->
+<!-- ###################################################### -->
+<!-- ###################################################### -->
+<!-- ###################################################### -->
+
+<div *ngIf="descriptor != undefined">
+  <div class="card">
+<!--    <div class="card-header bg-white">-->
+<!--      <strong class="text-primary">Language: {{ descriptor!.language.languageCode }}</strong>-->
+<!--    </div>-->
+    <div class="card-body" *ngIf="descriptor?.isBig">
+
+<!--      <strong class="text-primary">Language: {{ descriptor!.language.languageCode }}</strong>-->
+      <strong class="text-primary">{{uiElementService.uiElements.at(43)}}: {{ descriptor!.language.languageCode }}</strong>
+
+<!--      <div class="mb-3">-->
+<!--        <label for="bigValue" class="form-label">Value for {{ descriptor!.language.languageCode }}</label>-->
+        <textarea [(ngModel)]="descriptor!.value" class="form-control" id="bigValue" rows="3" maxlength="3000"></textarea>
+<!--      </div>-->
+    </div>
+    <div class="card-body" *ngIf="!descriptor?.isBig">
+
+<!--      <strong class="text-primary">Language: {{ descriptor!.language.languageCode }}</strong>-->
+      <strong class="text-primary">{{uiElementService.uiElements.at(43)}}: {{ descriptor!.language.languageCode }}</strong>
+
+<!--      <div class="mb-3">-->
+<!--        <label for="shortValue" class="form-label">Value for {{ descriptor!.language.languageCode }}</label>-->
+        <input [(ngModel)]="descriptor!.value" type="text" class="form-control" id="shortValue" maxlength="254">
+<!--      </div>-->
+    </div>
+  </div>
+</div>

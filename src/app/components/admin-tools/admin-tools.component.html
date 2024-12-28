@@ -1,0 +1,135 @@
+<div class="container" style="margin-top: 1em;">
+
+<!--  <h5>Admin Tools</h5>-->
+  <h5>{{uiElementService.uiElements.at(8)}}</h5>
+  <p></p>
+
+  <!-- === MESSAGE ON FILE SIZE ================== -->
+  <div *ngIf="_showAlertOnFileSize" style="margin-top: 1em; margin-bottom: 1em;">
+    <div class="card bg-body-secondary" (click)="_showAlertOnFileSize = false">
+
+<!--      <div class="container text-primary"><p></p>The file size cannot be more than {{EXCEL_FILE_MAX_SIZE / 1000000}} Mb.-->
+      <div class="container text-primary"><p></p>{{uiElementService.uiElements.at(51)}} {{EXCEL_FILE_MAX_SIZE / 1000000}} Mb.
+
+        &nbsp;<button (click)="_showAlertOnFileSize = false" type="button" class="btn btn-sm btn-outline-primary me-2 m-auto">Ok</button>
+      </div>
+      <p></p>
+    </div>
+  </div>
+  <!-- === END OF MESSAGE ON FILE SIZE =========== -->
+  <!-- === MESSAGE AFTER UPLOAD ================== -->
+  <div *ngIf="_showAlertUploading" style="margin-top: 1em; margin-bottom: 1em;">
+    <div class="card bg-body-secondary" (click)="_showAlertUploading = false">
+
+<!--      <div class="container text-primary"><p></p>The file has been uploaded 148-->
+      <div class="container text-primary"><p></p>{{uiElementService.uiElements.at(148)}}
+
+        &nbsp;<button (click)="_showAlertUploading = false" type="button" class="btn btn-sm btn-outline-primary me-2 m-auto">Ok</button>
+      </div>
+      <p></p>
+    </div>
+  </div>
+  <!-- === END OF MESSAGE AFTER UPLOAD =========== -->
+
+  <div class="card-group">
+
+    <div class="card" style="">
+      <div class="card-body">
+
+<!--        <h5 class="card-title">Export UI elements 135</h5>-->
+        <h5 class="card-title">{{uiElementService.uiElements.at(135)}}</h5>
+
+<!--        <h6 class="card-subtitle mb-2 text-muted">Export UI elements to Excel file 136</h6>-->
+        <h6 class="card-subtitle mb-2 text-muted">{{uiElementService.uiElements.at(136)}}</h6>
+
+        <p class="card-text">
+
+<!--          This tool allows you to export UI elements to an Excel file.
+Choose the language below and the system will save to your disk file
+in Excel format with the list of all UI elements (shorts and bigs) for the language.-->
+          {{uiElementService.uiElements.at(134)}}
+
+        </p>
+
+        <div class="dropdown" style="cursor: pointer;">
+          <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+          <!--          Export language to Excel 137-->
+          {{uiElementService.uiElements.at(137)}}
+
+        </button>
+          <ul class="dropdown-menu">
+            <li *ngFor="let language of languages">
+              <span class="dropdown-item" (click)="exportUiElementsCurrentLanguageToExcel(language)">{{ language.languageCode }}</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card" style="">
+      <div class="card-body">
+
+<!--        <h5 class="card-title">Import UI elements 138</h5>-->
+        <h5 class="card-title">{{uiElementService.uiElements.at(138)}}</h5>
+
+<!--        <h6 class="card-subtitle mb-2 text-muted">Import UI elements to update a specific language 139</h6>-->
+        <h6 class="card-subtitle mb-2 text-muted">{{uiElementService.uiElements.at(139)}}</h6>
+
+<!--        <p class="card-text">-->
+<!--          This tool allows you to import UI elements to update the specific language. Please, pay attention: use the file in the format that you got via the tool "export UI elements" only. Please, do not change service data in the file (language code, key numbers, etc): you can change text values of UI elements only.-->
+<!--          140 + 141 .</p>-->
+        {{uiElementService.uiElements.at(140)}} {{uiElementService.uiElements.at(141)}}
+        <p></p>
+
+        <div class="input-group input-group-sm" style="max-width: 20em;">
+            <input #myElement type="file" class="form-control" id="inputGroupFile041" aria-describedby="inputGroupFileAddon041" aria-label="Upload"
+                   accept=".xlsx"
+                   (change)="onFileChange($event)" >
+            <button (click)="upload();" class="btn btn-outline-primary" type="button" id="inputGroupFileAddon041">Upload</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card" style="">
+      <div class="card-body">
+
+<!--        <h5 class="card-title">Snapshot database 142</h5>-->
+        <h5 class="card-title">{{uiElementService.uiElements.at(142)}}</h5>
+
+<!--        <h6 class="card-subtitle mb-2 text-muted">Snapshot database to JSON 143</h6>-->
+        <h6 class="card-subtitle mb-2 text-muted">{{uiElementService.uiElements.at(143)}}</h6>
+
+        <!--        <p class="card-text">This tool allows you to export your data (categories or products) to the JSON file.
+        Choose 'category' or 'products' in the list below and the system will save the JSON file to your disk.
+        The file will contain data only (without images)..</p>-->
+        <p class="card-text">{{uiElementService.uiElements.at(147)}}.</p>
+
+
+
+        <div class="dropdown" style="cursor: pointer;">
+          &nbsp;<button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+<!--            Export Data 144-->
+          {{uiElementService.uiElements.at(144)}}
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+
+<!--              <span class="dropdown-item" (click)="exportProductsToJson()">Export products 145</span>-->
+              <span class="dropdown-item" (click)="exportProductsToJson()">{{uiElementService.uiElements.at(145)}}</span>
+
+<!--              <span class="dropdown-item" (click)="exportCategoriesToJson()">Export categories 146</span>-->
+              <span class="dropdown-item" (click)="exportCategoriesToJson()">{{uiElementService.uiElements.at(146)}}</span>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

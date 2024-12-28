@@ -1,0 +1,46 @@
+  <div class="container">
+    <p></p>
+
+<!--    <h5 class="text-primary">Staff</h5>-->
+    <h5 class="text-primary">{{uiElementService.uiElements.at(7)}}</h5>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-bordered" style="cursor: pointer; max-width: fit-content;">
+        <thead>
+          <tr>
+            <th style="max-width: fit-content;" scope="col">Email</th>
+
+<!--            <th style=";" scope="col">Name</th>-->
+            <th style=";" scope="col">{{uiElementService.uiElements.at(87)}}</th>
+
+<!--            <th style=";" scope="col">Roles</th>-->
+            <th style=";" scope="col">{{uiElementService.uiElements.at(93)}}</th>
+
+<!--            <th style=";" scope="col">Confirmed</th>-->
+            <th style=";" scope="col">{{uiElementService.uiElements.at(94)}}</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let staff of staffList; let index = index;" (click)="goToEditStaff(staff.user.email)">
+            <td>{{staff.user.email}}</td>
+            <td>{{staff.firstName}}&nbsp;{{staff.lastName}}</td>
+            <td>{{staff.user.roles}}</td>
+            <td>
+
+<!--              <span *ngIf="staff.user.confirmed" class="text-success">Yes</span>-->
+              <span *ngIf="staff.user.confirmed" class="text-success">{{uiElementService.uiElements.at(149)}}</span>
+
+<!--              <span *ngIf="!staff.user.confirmed" class="text-danger">No</span>-->
+              <span *ngIf="!staff.user.confirmed" class="text-danger">{{uiElementService.uiElements.at(150)}}</span>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+<!--    <button class="btn btn-sm btn-primary" type="button" (click)="goingToNewStaff()">Register New Staff</button>-->
+    <button class="btn btn-sm btn-primary" type="button" (click)="goingToNewStaff()">{{uiElementService.uiElements.at(95)}}</button>
+
+  </div>

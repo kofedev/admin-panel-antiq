@@ -1,0 +1,88 @@
+<div>
+  <div *ngIf="!_inProgress; else inProgress">
+  <div class="container">
+    <div class="card" style="margin-top: 1em;">
+      <div class="card-header">
+
+<!--        <span class="text-primary"><strong>UI Short Elements</strong></span>-->
+        <span class="text-primary"><strong>{{uiElementService.uiElements.at(74)}}</strong></span>
+
+      </div>
+
+      <div class="card-body">
+        <div *ngIf="authService.user.getValue()!.roles.includes('Admin')" class="table-responsive">
+<!--          Register New UI Short Element-->
+          {{uiElementService.uiElements.at(75)}}
+          <table class="table table-hover table-bordered" style="cursor: pointer; width: 100%;">
+            <thead>
+            <tr>
+<!--              <th style="max-width: fit-content;" scope="col">Default Value</th>-->
+              <th style="max-width: fit-content;" scope="col">{{uiElementService.uiElements.at(76)}}</th>
+              <th style="max-width: fit-content;" scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr (keydown.enter)="registerNewShortUiElement()">
+<!--              <td><input style="max-width: 7em;" type="text" class="form-control" required [(ngModel)]="_newKey" maxlength="5" /></td>-->
+              <td><input style="" type="text" class="form-control" required [(ngModel)]="_newDefaultValue" maxlength="250" /></td>
+              <td>
+                <div (click)="registerNewShortUiElement()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                  </svg>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-responsive">
+<!--          UI Short Elements with default values-->
+          {{uiElementService.uiElements.at(77)}}
+          <table class="table table-hover table-bordered" style="cursor: pointer; width: 100%;">
+            <thead>
+            <tr>
+
+<!--              <th style="max-width: fit-content;" scope="col">Key</th>-->
+              <th style="max-width: fit-content;" scope="col">{{uiElementService.uiElements.at(78)}}</th>
+
+<!--              <th style=";" scope="col">Value</th>-->
+              <th style=";" scope="col">{{uiElementService.uiElements.at(79)}}</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let uielement of uiElements | sortUiElementsByKey; let index = index;" (click)="goToEditUiElement(uielement)">
+              <td style="max-width: 6em;">{{uielement.key}}</td>
+              <td style="max-width: 19em;">
+
+<!--                <span *ngIf="isUiElementHasMaximumKey(uielement)" class="text-bg-primary">[deletable]</span>-->
+                <span *ngIf="isUiElementHasMaximumKey(uielement)" class="text-bg-primary">[{{uiElementService.uiElements.at(96)}}]</span>
+
+                {{uielement.value}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+<!--      <div class="card-footer">-->
+<!--      </div>-->
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- === INDICATOR ============================================================ -->
+<ng-template #inProgress>
+  <div class="d-flex justify-content-center align-items-center" style="height: 20vh;">
+    <div class="text-center">
+      <div class="d-flex align-items-center">
+        updating...&nbsp;&nbsp;
+        <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>

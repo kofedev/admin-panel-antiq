@@ -1,0 +1,107 @@
+<div *ngIf="currentCategory">
+  <div *ngIf="!_inProgress; else inProgress">
+    <div class="container">
+      <div class="card" style="max-width: 24em; margin-top: 1em;">
+        <div class="card-header">
+
+<!--          <span class="text-primary"><strong>Categories</strong></span>-->
+          <span class="text-primary"><strong>{{uiElementService.uiElements.at(1)}}</strong></span>
+
+        </div>
+        <div class="card-body">
+          <div class="table-responsive" style="width: 100%; max-height: 20em;">
+            <table class="table table-hover" style="cursor: pointer;">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th class="text-muted">
+                    <!-- *** PARENT MATTER *** -->
+                    <span *ngIf="currentCategory.root">&nbsp;</span>
+                    <span *ngIf="currentCategory.parent" (click)="goToCategory(currentCategory.parent)">
+<!--                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">-->
+<!--                          <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>-->
+<!--                        </svg>-->
+
+
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                      </svg>
+
+
+<!--                        <span>&nbsp; return: &nbsp;</span>-->
+                        <span>&nbsp;{{uiElementService.uiElements.at(26)}}:&nbsp;</span>
+
+<!--                        <span *ngIf="currentCategory.parent.root">Root</span>-->
+                        <span *ngIf="currentCategory.parent.root">{{uiElementService.uiElements.at(20)}}</span>
+
+<!--                        {{ currentCategory.parent.categoryId }} TITLE:-->
+                        <span *ngFor="let descriptor of currentCategory.parent.titleDescriptors">
+                          <span *ngIf="descriptor.language.languageId === currentLanguageService.currentLanguage.languageId">
+                              {{ descriptor.value }}
+                          </span>
+                        </span>
+                    </span>
+                    <!-- *** END OF PARENT MATTER *** -->
+                  </th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let subCategory of currentCategory.subcategories | sortSubCategories; let index = index;" (click)="goToCategory(subCategory)">
+                <!-- 1 COLUMN -->
+                <td (click)="goToEditCategory(subCategory.categoryId)" style="width: 1em;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                  </svg>
+                </td>
+                <!-- 2 COLUMN -->
+                <td style="width: fit-content;">
+<!--                  <div *ngFor="let descriptor of subCategory.titleDescriptors">-->
+<!--                    <div *ngIf="descriptor.language.languageId === currentLanguageService.currentLanguage.languageId">-->
+<!--                      <span *ngIf="subCategory.active">{{ descriptor.value }}</span>-->
+<!--                      <span *ngIf="!subCategory.active" class="text-muted">{{ descriptor.value }}</span>-->
+<!--                    </div>-->
+<!--                  </div>-->
+                  <span *ngIf="subCategory.active">{{ subCategory.title! }}</span>
+                  <span *ngIf="!subCategory.active" class="text-muted">{{ subCategory.title! }}</span>
+                </td>
+                <!-- 3 COLUMN -->
+                <td style="width: 1em;">
+                  <span *ngIf="subCategory.active" class="text-success">&#x25cf;</span>
+                  <span *ngIf="!subCategory.active" class="text-danger">&#x25cf;</span>
+                </td>
+              </tr>
+              </tbody>
+
+
+
+
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+<!--          <button class="btn btn-sm btn-primary" type="button" (click)="createNewEmptyCategory(currentCategory)">New category</button>-->
+          <button class="btn btn-sm btn-primary" type="button" (click)="createNewEmptyCategory(currentCategory)">{{uiElementService.uiElements.at(9)}}</button>
+        </div>
+
+        </div>
+        <!--      <div class="card-footer">-->
+        <!--      </div>-->
+      </div>
+    </div>
+</div>
+
+
+<!-- === INDICATOR ============================================================ -->
+<ng-template #inProgress>
+  <div class="d-flex justify-content-center align-items-center" style="height: 20vh;">
+    <div class="text-center">
+      <div class="d-flex align-items-center">
+        updating...&nbsp;&nbsp;
+        <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

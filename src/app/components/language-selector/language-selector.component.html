@@ -1,0 +1,10 @@
+<span class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="text-primary" *ngIf="currentLanguageService.currentLanguage">{{ currentLanguageService.currentLanguage.languageCode }}</span>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+             <li *ngFor="let language of currentLanguageService.activeLanguageArray">
+                <a style="cursor: pointer;" class="dropdown-item text-primary" (click)="languageSelect(language)">{{ language.languageCode }}</a>
+             </li>
+          </ul>
+</span>

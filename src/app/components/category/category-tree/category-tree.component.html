@@ -1,0 +1,80 @@
+<div *ngIf="currentCategory">
+  <div class="card">
+    <div class="card-body">
+      <!-- **** CURRENT CATEGORY TITLE **** -->
+      <h6 class="card-title">
+
+<!--        <strong>Category:</strong>-->
+        <strong>{{uiElementService.uiElements.at(40)}}:</strong>
+
+        <span class="text-muted">
+
+<!--            <span *ngIf="currentCategory.root">&nbsp;Root</span>-->
+            <span *ngIf="currentCategory.root">&nbsp;{{uiElementService.uiElements.at(20)}}</span>
+
+            <span *ngIf="!currentCategory.root">
+                <span *ngFor="let descriptor of currentCategory.titleDescriptors">
+                    <span *ngIf="descriptor.language.languageId === currentLanguageService.currentLanguage.languageId">
+                        {{ descriptor.value }}
+                    </span>
+                </span>
+            </span>
+        </span>
+      </h6>
+      <hr>
+      <!-- **** TABLE **** -->
+      <div class="table-responsive height-category-tree">
+        <table class="table table-hover table-borderless" style="cursor: pointer; max-width: fit-content;">
+          <!-- *** PARENT MATTER *** -->
+          <span *ngIf="currentCategory.parent" (click)="loadCategoryById(currentCategory.parent.categoryId, true)">
+<!--            [-->
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+              </svg>
+<!--                  ... ID: {{ currentCategory.parent.categoryId }} TITLE:-->
+              <!-- NON ROOT CASE -->
+              <ng-container *ngIf="!currentCategory.parent.root">
+                 <ng-container *ngFor="let descriptor of currentCategory.parent.titleDescriptors">
+                      <ng-container *ngIf="descriptor.language.languageId === currentLanguageService.currentLanguage.languageId" class="text-muted">
+                        <span class="text-muted">&nbsp;[ {{ descriptor.value }} ]</span>
+                      </ng-container>
+                 </ng-container>
+              </ng-container>
+
+              <!-- ROOT CASE -->
+              <span *ngIf="currentCategory.parent.root" class="text-muted">
+
+<!--                  [ Root ] &nbsp; &nbsp; &nbsp; &nbsp;-->
+
+                  [ {{uiElementService.uiElements.at(20)}} ] &nbsp; &nbsp; &nbsp; &nbsp;
+              </span>
+
+            </span>
+          <!-- *** END OF PARENT MATTER *** -->
+
+          <tbody>
+          <tr *ngFor="let subCategory of currentCategory.subcategories | sortSubCategories; let index = index;" (click)="loadCategoryById (subCategory.categoryId, true)">
+
+            <td>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                            <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                     </svg>
+                     {{ subCategory.title! }}
+
+              <span *ngIf="subCategory.active" class="text-success">&#x25cf;</span>
+              <span *ngIf="!subCategory.active" class="text-danger">&#x25cf;</span>
+
+
+            </td>
+          </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

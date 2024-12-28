@@ -1,0 +1,66 @@
+
+//@import url('https://fonts.googleapis.com/css2?family=Overlock+SC&display=swap');
+
+@import "bootstrap/dist/css/bootstrap.css";
+
+
+
+//body {
+//  height: 100vh;
+//}
+//.site {
+//  min-height: 100%;
+//  display: flex;
+//  flex-direction: column;
+//  justify-content: space-between;
+//}
+
+//$primary: #663399;
+//$primary: rgba(82, 16, 9, 0.59);
+$primary: #123C69;
+//$primary: #7cc;
+//$danger: #c00101;
+$danger: #AC3B61;
+//$success: #007700;
+$success: #669933;
+
+$warning: orange;
+$info: #96e0f8;
+
+$body-bg: #ffffff;
+//$body-bg: #fac8a3;
+
+
+.alert-info {
+
+  background-color: $info !important;
+  //color: #fff !important;
+}
+
+//$accordion-color:                         $primary;
+//$accordion-bg:                            $body-bg;
+//$accordion-border-color:                  rgba($black, .125);
+$accordion-button-color:                    $primary;
+//$accordion-button-bg:                     $accordion-bg;
+$accordion-button-active-bg:                $primary;
+$accordion-button-active-color:             white;
+//$accordion-button-active-color:           $primary;
+//$accordion-button-focus-border-color:     $input-focus-border-color;
+//$accordion-button-focus-box-shadow:       $btn-focus-box-shadow;
+$accordion-icon-color:                      $primary;
+$accordion-icon-active-color:               $primary;
+
+// BUTTON RADIUS
+//$btn-border-radius:           $border-radius;
+$btn-border-radius:           1.0rem;
+
+//$btn-border-radius-sm:        $border-radius-sm;
+$btn-border-radius-sm:        0.7rem;
+
+//$btn-border-radius-lg:        $border-radius-lg;
+$btn-border-radius-lg:        1.3rem;
+
+
+
+
+@import "bootstrap";
